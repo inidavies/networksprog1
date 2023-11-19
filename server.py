@@ -11,28 +11,24 @@ def  server(hostname, port):
     # Bind to address and ip
     server_socket.bind(server_adress_port)
 
+    print('Inioluwa Davies iod0007')
     print(f"Server listening on {hostname}:{port}")
+    print("[server] : ready to accept data...")
 
     while True:
         # Listen for incoming datagrams
         #bufferSize, 1024
         response, client = server_socket.recvfrom(1024)
-        print(f"Received '{response.decode()}' from {server}")
+        print("[client] : PING")
         
         # Dropping packets with a 30% chance so, 70% response rate
         r  = randint(1,10)
         if  r < 3:
-            print(r, ' Packet dropped\n')
+            print('packet dropped')
         else:
             response =  b'PONG'
             server_socket.sendto(response, client)
-            print(f"Sent 'PONG' to {client}\n")
+            #print(f"Sent 'PONG' to {client}")
  
 if __name__ == "__main__":
-    #if len(sys.argv) != 3:
-        #print("Usage: python client.py <hostname> <port>")
-        #sys.exit(1)
-
-    #hostname = sys.argv[1]
-    #port = int(sys.argv[2])
     server('127.0.0.1', 20001)
